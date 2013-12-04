@@ -19,11 +19,9 @@ class MyrrixClient extends Client
         $default = array(
             'base_url' => 'http://{hostname}:{port}',
             'hostname' => 'localhost',
-            'port'     => 8080,
-            'username' => null,
-            'password' => null,
+            'port'     => 8080
         );
-        $required = array('hostname', 'port', 'base_url', 'username', 'password');
+        $required = array('hostname', 'port', 'base_url');
         $config = Collection::fromConfig($config, $default, $required);
 
         $client = new self($config->get('base_url'), $config);
@@ -33,8 +31,10 @@ class MyrrixClient extends Client
             'Accept' => 'text/html',
         ));
 
-        $authPlugin = new CurlAuthPlugin($config['username'], $config['password']);
-        $client->addSubscriber($authPlugin);
+//        $authPlugin = new CurlAuthPlugin($config['username'], $config['password']);
+//        $client->addSubscriber($authPlugin);
+
+        //$myrrix->getClient()->getConfig()->setPath('request.options/auth', array('merzh', 'jckhdsbacdbsakc2jhwq2oeudw', 'Digest'));
 
         return $client;
     }

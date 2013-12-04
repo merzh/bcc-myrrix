@@ -22,10 +22,14 @@ class MyrrixService
     {
         $this->client = MyrrixClient::factory(array(
             'hostname' => $host,
-            'port'     => $port,
-            'username' => $username,
-            'password' => $password,
+            'port'     => $port
         ));
+
+        if (!empty($username))
+        {
+            $this->client->getConfig()->setPath('request.options/auth', array($username, $password, 'Digest'));
+        }
+
     }
 
     /**
